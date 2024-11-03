@@ -92,6 +92,8 @@ services:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
+    ports:
+      - 5433:5432
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
@@ -237,6 +239,9 @@ services:
         mkdir -p /sources/logs /sources/dags /sources/plugins
         chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
         exec /entrypoint airflow version
+        fi
+        pip install --no-cache-dir -r /requirements.txt  # Instala as dependências aqui
+        exec /entrypoint airflow version
     # yamllint enable rule:line-length
     environment:
       <<: *airflow-common-env
@@ -248,6 +253,7 @@ services:
     user: "0:0"
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}:/sources
+      - ./requirements.txt:/requirements.txt
 
   airflow-cli:
     <<: *airflow-common
