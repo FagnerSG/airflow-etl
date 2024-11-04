@@ -13,7 +13,7 @@ RUN apt-get update \
 
 # Instala os pacotes do Python necessários, incluindo o yfinance
 USER airflow
-COPY requirements.txt /requirements.txt
+COPY requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 
 # Copia os DAGs para o diretório correto dentro do contêiner

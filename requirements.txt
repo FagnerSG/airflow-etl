@@ -150,5 +150,5 @@ wirerope==0.4.7
 wrapt==1.16.0
 WTForms==3.2.1
 yarl==1.17.1
-yfinance==0.2.48
+yfinance
 zipp==3.20.2
